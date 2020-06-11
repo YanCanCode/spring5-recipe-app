@@ -10,9 +10,7 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //OnetoOne to the Notes class with cascade because its the parent
-    @OneToOne(cascade = CascadeType.ALL)
-    private Notes notes;
+
 
     private String description;
     private Integer prepTime;
@@ -23,7 +21,7 @@ public class Recipe {
     private String directions;
 
 
-    // mappedBy"property name in child class"
+    // mappedBy "property name in child class"
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
 
@@ -33,23 +31,24 @@ public class Recipe {
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
+    //OnetoOne to the Notes class with cascade because its the parent
+    @OneToOne(cascade = CascadeType.ALL)
+    private Notes notes;
+
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+            // Column for this side of the relationship
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            // Column for other side of the relationship ie: Category class
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Notes getNotes() {
-        return notes;
-    }
-
-    public void setNotes(Notes notes) {
-        this.notes = notes;
-    }
-    public String getDescription() {
-        return description;
     }
 
     public void setDescription(String description) {
@@ -126,5 +125,24 @@ public class Recipe {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public Notes getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Notes notes) {
+        this.notes = notes;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
