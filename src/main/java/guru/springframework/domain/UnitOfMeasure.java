@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Set;
 
 @Entity
 public class UnitOfMeasure {
@@ -23,11 +22,11 @@ public class UnitOfMeasure {
         this.id = id;
     }
 
-    public String description() {
+    public String getDescription() {
         return description;
     }
 
-    public void description(String uom) {
-        this.description = uom;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
