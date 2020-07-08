@@ -15,7 +15,6 @@ public class Recipe {
     private Long id;
 
 
-
     private String description;
     private Integer prepTime;
     private Integer cookTime;
@@ -49,14 +48,19 @@ public class Recipe {
 
     private Set<Category> categories = new HashSet<>();
 
-    public Recipe addIngredient(Ingredient ingredient) {
-        ingredient.setRecipe(this);
-        this.ingredients.add(ingredient);
-        return this;
+    public Recipe() {
     }
 
     public void setNotes(Notes notes) {
         this.notes = notes;
         notes.setRecipe(this);
     }
+
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
+    }
+
 }
+
